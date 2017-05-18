@@ -1,1 +1,12 @@
-# Lab_SQL
+# SQL Server Database Implementation Lab
+- 資料庫概論
+- 實體關聯模型與正規化
+- 環境安裝與使用說明
+- DDL 資料庫與資料表建置語法
+- DML 資料庫內容存取語法 (INSERT、SELECT、UPDATE、DELETE)
+- 索引運作的原理與管理
+- 檢視表的建立與注意事項
+- Transact-SQL程式設計
+- 觸發程序(Trigger)寫作與呼叫
+- 交易處理與鎖定
+- 資料匯出與匯入
