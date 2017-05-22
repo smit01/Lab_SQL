@@ -1,0 +1,19 @@
+use Northwind
+go
+
+-- °_
+select * from Products
+
+-- ©Ó
+select * from Products
+  where ...?
+
+-- Âà
+select * from Suppliers where Country = 'USA'
+select SupplierID from Suppliers where Country = 'USA'
+
+
+-- ¦X
+select * from Products
+  where SupplierID in (select SupplierID from Suppliers where Country = 'USA')
+
