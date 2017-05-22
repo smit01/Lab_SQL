@@ -1,0 +1,36 @@
+use Northwind
+go
+
+select * from Products
+
+select CategoryID, ProductID, ProductName, UnitPrice
+	from Products
+	order by UnitPrice 
+
+select CategoryID, ProductID, ProductName, UnitPrice,
+    rank() over (order by UnitPrice) as OrderNo
+	from Products
+	order by UnitPrice 
+
+
+select CategoryID, ProductID, ProductName, UnitPrice,
+    dense_rank() over (order by UnitPrice) as OrderNo
+	from Products
+	order by UnitPrice 
+
+select CategoryID, ProductID, ProductName, UnitPrice,
+    rank() over (partition by CategoryID  order by UnitPrice) as OrderNo
+	from Products
+	order by CategoryID, UnitPrice 
+
+select CategoryID, ProductID, ProductName, UnitPrice,
+    row_number() over (order by UnitPrice) as OrderNo
+	from Products
+	order by UnitPrice 
+
+
+select CategoryID, ProductID, ProductName, UnitPrice,
+    ntile(5) over (order by UnitPrice) as OrderNo
+	from Products
+	order by UnitPrice
+
