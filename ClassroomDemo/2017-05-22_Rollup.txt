@@ -1,0 +1,24 @@
+use Northwind
+go
+
+select * 
+	from [Order Details] 
+	order by OrderID
+
+select OrderID, sum(Quantity) 
+	from [Order Details] 
+	group by OrderID
+
+
+select OrderID, ProductID, sum(Quantity)
+	from [Order Details] 
+	group by OrderID, ProductID
+
+
+select OrderID, ProductID, sum(Quantity)
+	from [Order Details] 
+	group by OrderID, ProductID with rollup
+
+
+
+

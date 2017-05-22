@@ -1,0 +1,48 @@
+
+-- 各個客戶購買過哪些商品
+
+use Northwind
+go
+
+select * from Customers
+select * from Orders
+select * from [Order Details]
+select * from products
+
+select c.CustomerID, CompanyName, OrderID
+  from Customers as c 
+    join Orders o on o.CustomerID = c.CustomerID
+
+
+select c.CustomerID, CompanyName, o.OrderID, ProductID
+  from Customers as c 
+    join Orders o on o.CustomerID = c.CustomerID
+	join [Order Details] od on od.OrderID = o.OrderID
+order by c.CustomerID, o.OrderID
+
+select c.CustomerID, CompanyName, o.OrderID, 
+  p.ProductID, ProductName
+  from Customers as c 
+    join Orders o on o.CustomerID = c.CustomerID
+	join [Order Details] od on od.OrderID = o.OrderID
+	join Products p on p.ProductID = od.ProductID
+order by c.CustomerID, o.OrderID
+
+
+select c.CustomerID, CompanyName, p.ProductID, ProductName
+  from Customers as c 
+    join Orders o on o.CustomerID = c.CustomerID
+	join [Order Details] od on od.OrderID = o.OrderID
+	join Products p on p.ProductID = od.ProductID
+order by c.CustomerID, p.ProductID
+
+-- ================
+
+select distinct
+  c.CustomerID, CompanyName, p.ProductID, ProductName
+  from Customers as c 
+    join Orders o on o.CustomerID = c.CustomerID
+	join [Order Details] od on od.OrderID = o.OrderID
+	join Products p on p.ProductID = od.ProductID
+order by c.CustomerID, p.ProductID
+
