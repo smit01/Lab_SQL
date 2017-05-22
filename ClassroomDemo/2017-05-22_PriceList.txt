@@ -1,0 +1,97 @@
+use Northwind
+go
+
+-- 起
+select * from Products
+
+-- 承
+select CategoryID, ProductID, ProductName, UnitPrice
+  from Products
+
+-- 轉
+select avg(UnitPrice) from Products
+
+-- 合
+select CategoryID, ProductID, ProductName, UnitPrice
+  , (select avg(UnitPrice) from Products) as AvgPrice
+  from Products
+
+select CategoryID, ProductID, ProductName, UnitPrice
+  , (select avg(UnitPrice) from Products) as AvgPrice
+  , UnitPrice - (select avg(UnitPrice) from Products) as DiffPrice
+  from Products
+
+
+
+-- ------------------------------------
+
+
+
+
+use Northwind
+go
+
+select * from Products
+
+select p.CategoryID, ProductID, ProductName, UnitPrice
+  from Products as p
+
+select CategoryID, p.CategoryID, 
+  ProductID, ProductName, UnitPrice
+  from Products as p
+
+select CategoryID, (select p.CategoryID), 
+  ProductID, ProductName, UnitPrice
+  from Products as p
+
+-- ---------------------------------------------
+
+use Northwind
+go
+
+-- 起
+select * from Products
+
+-- 承
+select CategoryID, ProductID, ProductName, UnitPrice
+  from Products
+
+-- 轉
+select avg(UnitPrice) from Products where CategoryID = 1
+select avg(UnitPrice) from Products where CategoryID = 2
+
+-- 合
+select CategoryID, ProductID, ProductName, UnitPrice
+  , (select avg(UnitPrice) from Products where CategoryID = 1) as AvgPrice
+  from Products
+
+
+select CategoryID, ProductID, ProductName, UnitPrice
+  , (select avg(UnitPrice) from Products where CategoryID = p.CategoryID) as AvgPrice
+  from Products p
+
+select CategoryID, ProductID, ProductName, UnitPrice
+  , (select avg(UnitPrice) from Products where CategoryID = p.CategoryID) as AvgPrice
+  , UnitPrice - (select avg(UnitPrice) from Products where CategoryID = p.CategoryID) as DiffPrice
+  from Products p
+
+
+---------------
+
+select CategoryID, Avg(UnitPrice) as AvgPrice 
+  from Products 
+  group by CategoryID
+
+
+select p.CategoryID, ProductID, ProductName, UnitPrice, AvgPrice,
+  UnitPrice - AvgPrice as DiffPrice
+  from Products as p join 
+  (
+	select CategoryID, Avg(UnitPrice) as AvgPrice 
+	  from Products 
+	  group by CategoryID
+  ) AS G on G.CategoryID = p.CategoryID
+order by ProductID
+
+
+

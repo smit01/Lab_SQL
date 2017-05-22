@@ -1,0 +1,23 @@
+use Northwind
+go
+
+select * from Orders
+
+select * from Orders
+  order by OrderDate DESC
+
+select top 20 * from Orders
+  order by OrderDate DESC
+
+-- error:
+select last 20 * from Orders
+  order by OrderDate ASC
+
+
+select * from 
+	(
+		select top 20 * from Orders
+		  order by OrderDate DESC
+	) as X
+order by OrderDate ASC
+

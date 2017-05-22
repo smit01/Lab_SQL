@@ -1,0 +1,37 @@
+use Northwind
+go
+
+-- °_
+select * from Orders
+
+-- ©Ó
+select OrderID, CustomerID, OrderDate
+  from Orders
+  where ...?
+
+-- Âà
+select * from [Order Details]
+  where ProductID = 23 and Quantity > 20
+
+
+-- ¦X
+select OrderID, CustomerID, OrderDate
+  from Orders
+  where OrderID in (10337, 10348, 10396, ...)
+
+-- error:
+select OrderID, CustomerID, OrderDate
+  from Orders
+  where OrderID in (
+	select * from [Order Details]
+		where ProductID = 23 and Quantity > 20  
+  )
+
+
+select OrderID, CustomerID, OrderDate
+  from Orders
+  where OrderID in (
+	select OrderID from [Order Details]
+		where ProductID = 23 and Quantity > 20  
+  )
+
