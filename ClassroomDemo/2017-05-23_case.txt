@@ -1,0 +1,32 @@
+use northwind
+go
+
+select * from Products
+go
+
+select ProductID, ProductName
+  from Products
+  order by ProductID
+go
+
+select ProductID, ProductName,
+  case when ProductID % 2 = 0 then 0 else 1 end as test
+  from Products
+  order by ProductID
+go
+
+
+select ProductID, ProductName,
+  case when ProductID % 2 = 0 then 0 else 1 end as test
+  from Products
+  order by 
+  (
+     case 
+	     when ProductID % 2 = 0 then 0 
+		 else 1 
+	 end
+  ) DESC
+go
+
+
+
