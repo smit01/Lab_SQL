@@ -1,0 +1,43 @@
+use Northwind
+go
+
+create table t1
+(
+  id int primary key,
+  data varchar(20)
+)
+
+create table t2
+(
+  id int primary key,
+  data varchar(20)
+)
+go
+
+insert into t1 values (1, 'data A')
+go
+
+select * from t1
+select * from t2
+go
+
+create trigger trigger1
+  on t1 for insert
+as
+  insert into t2 select * from inserted
+go
+
+
+insert into t1 values (2, 'data B')
+go
+
+select * from t1
+select * from t2
+go
+
+-- exec sp_depends trigger1
+drop trigger trigger1
+drop table t1
+drop table t2
+go
+
