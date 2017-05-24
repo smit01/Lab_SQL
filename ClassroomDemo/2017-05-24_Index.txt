@@ -1,0 +1,68 @@
+create database IndexDB
+go
+
+use IndexDB
+go
+
+select * into od from Northwind.dbo.[Order Details]
+go
+
+alter table od
+  add test char(1000)
+go
+
+update od set test = OrderID
+go
+
+set statistics io on
+go
+
+-- 2424
+select * from od where OrderID = 10248
+go
+
+create clustered index idx_orderID on od(orderID)
+go
+
+-- 2
+select * from od where OrderID = 10248
+go
+
+select * from od where ProductID = 23
+go
+
+create nonclustered index idx_product on od(productId)
+go
+
+select * from od where ProductID = 23
+go
+
+select OrderID, ProductID from od where ProductID = 23
+go
+
+select OrderID, ProductID, Quantity
+  from od where ProductID = 23
+go
+
+create index idx_product2 on od(productId)
+  include (Quantity)
+go
+
+select OrderID, ProductID, Quantity
+  from od where ProductID = 23
+go
+
+
+-- create unique index idx_Name on tableName(fieldNames)
+
+drop index idx_product on od
+go
+
+use master
+go
+
+drop database IndexDB
+go
+
+
+
